@@ -105,7 +105,7 @@ function autoLeftNav() {
  * @param {any} data 
  */
 function submitVote(data) {
-    httpRequest('/users/vote', "POST", data, function (res) {
+    httpRequest('/users/vote', "GET", data, function (res) {
         if (res.error == 302) {
             window.location.href = '/';
         }

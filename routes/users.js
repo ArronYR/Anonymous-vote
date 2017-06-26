@@ -5,7 +5,7 @@ var config = require('../config.json');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     if (req.query.token != config.token) {
-        return res.redirect('/');
+        res.redirect('/');
     }
     req.getConnection(function (err, conn) {
         if (err) return next(err);
@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/voters', function (req, res, next) {
     if (req.query.token != config.token) {
-        return res.json({
+        res.json({
             error: 302,
             message: "无权访问"
         });
@@ -40,7 +40,7 @@ router.get('/voters', function (req, res, next) {
 
 router.get('/start', function (req, res, next) {
     if (req.query.token != config.token) {
-        return res.json({
+        res.json({
             error: 302,
             message: "无权访问"
         });
@@ -59,7 +59,7 @@ router.get('/start', function (req, res, next) {
 
 router.get('/vote', function (req, res, next) {
     if (!req.session.token || req.session.token != req.query.token) {
-        return res.redirect('/');
+        res.redirect('/');
     }
     req.getConnection(function (err, conn) {
         if (err) return next(err);
@@ -76,7 +76,7 @@ router.get('/vote', function (req, res, next) {
 
 router.post('/vote', function (req, res, next) {
     if (!req.session.token || req.session.token != req.body.token) {
-        return res.json({
+        res.json({
             error: 302,
             message: "无权访问"
         });
