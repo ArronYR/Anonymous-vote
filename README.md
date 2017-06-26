@@ -1,6 +1,6 @@
 ## Anonymous-vote
 
-基于Node.js的匿名实时投票系统。
+基于`Node.js`的匿名实时投票系统。
 
 需要自行分配登录`token`。
 
