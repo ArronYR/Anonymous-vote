@@ -161,7 +161,7 @@
             var fatal_score = total_score - max_score - min_score;
             fatal_score = fatal_score > 0 ? fatal_score : 0;
             var convert_voters = vote_count > 2 ? vote_count - 2 : 0;
-            var convert_score = convert_voters > 0 ? fatal_score / convert_voters : 0;
+            var convert_score = convert_voters > 0 ? fatal_score / convert_voters * 0.03 : 0;
 
             var calculate = {
                 vote_count: vote_count,
@@ -169,7 +169,7 @@
                 min_score: min_score,
                 total_score: total_score,
                 fatal_score: fatal_score,
-                convert_score: convert_voters
+                convert_score: convert_score
             }
             renderResult($result, calculate);
         });
