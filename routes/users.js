@@ -28,7 +28,7 @@ router.get('/voters', function (req, res, next) {
     }
     req.getConnection(function (err, conn) {
         if (err) return next(err);
-        conn.query('select *, date_format(`updated_at`,"%m-%d %H:%m:%S") as updated_at from tokens', [], function (err, result) {
+        conn.query('select *, date_format(`updated_at`,"%m-%d %H:%m:%S") as updated_at from tokens where status = 1', [], function (err, result) {
             if (err) return next(err);
             res.json({
                 error: 0,
