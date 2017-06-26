@@ -1,6 +1,15 @@
 var socket = io.connect(window.location.host);
 
 $(function () {
+    var $fullText = $('.full-text');
+    $('#btn-fullscreen').on('click', function () {
+        $.AMUI.fullscreen.toggle();
+    });
+
+    $(document).on($.AMUI.fullscreen.raw.fullscreenchange, function () {
+        $fullText.text($.AMUI.fullscreen.isFullscreen ? '退出全屏' : '开启全屏');
+    });
+
     autoLeftNav();
     $(window).resize(function () {
         autoLeftNav();

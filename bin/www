@@ -53,14 +53,12 @@ io.on('connection', function (socket) {
         voters.push(query.token);
         socket.join(query.token);
     }
-    console.log(voters);
     io.emit('voters', {
         type: 'voter_join',
         voters: voters
     });
 
     socket.on('vote', function (data) {
-        console.log('data -> ', data);
         connection.query('select * from user_votes where user_id = ?', [parseInt(data.vote.uid)], function (err, result) {
             if (err) throw err;
             io.emit('refresh_score', {
