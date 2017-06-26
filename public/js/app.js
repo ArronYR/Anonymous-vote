@@ -5,7 +5,6 @@ $(function () {
     $('#btn-fullscreen').on('click', function () {
         $.AMUI.fullscreen.toggle();
     });
-
     $(document).on($.AMUI.fullscreen.raw.fullscreenchange, function () {
         $fullText.text($.AMUI.fullscreen.isFullscreen ? '退出全屏' : '开启全屏');
     });
@@ -56,7 +55,12 @@ $(function () {
 
 });
 
-//获取url中"?"符后的字串 
+/**
+ * 获取url中"?"符后的字串 
+ * 
+ * @param {any} url 
+ * @returns 
+ */
 function getRequest(url) {
     var theRequest = new Object();
     if (url.indexOf("?") != -1) {
@@ -69,7 +73,10 @@ function getRequest(url) {
     return theRequest;
 }
 
-// 侧边菜单开关
+/**
+ * 侧边菜单开关
+ * 
+ */
 function autoLeftNav() {
     $('.tpl-header-switch-button').on('click', function () {
         if ($('.left-sidebar').is('.active')) {
@@ -92,7 +99,11 @@ function autoLeftNav() {
     }
 }
 
-// 提交投票信息
+/**
+ * 提交投票信息
+ * 
+ * @param {any} data 
+ */
 function submitVote(data) {
     httpRequest('/users/vote', "POST", data, function (res) {
         if (res.error == 302) {
@@ -120,7 +131,11 @@ function submitVote(data) {
     });
 }
 
-// 开始投票
+/**
+ * 开始投票
+ * 
+ * @param {any} uid 
+ */
 function startVote(uid) {
     httpRequest('/users/start', "GET", {
         uid: uid,
@@ -155,6 +170,12 @@ function startVote(uid) {
     });
 }
 
+/**
+ * 
+ * 渲染投票人列表
+ * 
+ * @param {any} callback 
+ */
 function renderVoters(callback) {
     httpRequest('/users/voters', "GET", {
         token: 'ae0fdb6f2512df5fcf712da4ed7b5daf'
@@ -184,6 +205,13 @@ function renderResult($ele, data, callback) {
     typeof callback == "function" && callback();
 }
 
+/**
+ * 渲染图表
+ * 
+ * @param {any} echarts 
+ * @param {any} subtext 
+ * @param {any} options 
+ */
 function renderEcharts(echarts, subtext, options) {
     option = {
         title: {
