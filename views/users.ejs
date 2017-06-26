@@ -132,6 +132,10 @@
         var $result = $('#result-container');
 
         socket.on('refresh_score', function (result) {
+            if ($select.val() != result.user_id) {
+                return;
+            };
+            
             var subtext = $select.find('option[value='+result.user_id+']').text();
             var keys = _.map(result.data, function (vote) {
                 return vote.token;
