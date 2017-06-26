@@ -1,0 +1,142 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+var app = require('../app');
+var debug = require('debug')('vote:server');
+var http = require('http');
+var url = require('url');
+var querystring = require('querystring');
+var mysql = require('mysql');
+var config = require('../config.json');
+var connection = mysql.createConnection({
+    host: config.db.host,
+    user: config.db.user,
+    password: config.db.password,
+    port: config.db.port,
+    database: config.db.database
+});
+
+connection.connect();
+
+/**
+ * Get port from environment and store in Express.
+ */
+var port = normalizePort(process.env.PORT || '1607');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+
+// Create socket.io
+var io = require('socket.io')(server);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+// Voters
+var voters = [];
+
+// Wait for socket event
+io.on('connection', function (socket) {
+    console.log("一个新连接", socket.request.headers.referer);
+
+    var query = querystring.parse(url.parse(socket.request.headers.referer).query);
+    if (voters.indexOf(query.token) == -1 && query.token != config.token) {
+        voters.push(query.token);
+        socket.join(query.token);
+    }
+    console.log(voters);
+    io.emit('voters', {
+        type: 'voter_join',
+        voters: voters
+    });
+
+    socket.on('vote', function (data) {
+        console.log('data -> ', data);
+        connection.query('select * from user_votes where user_id = ?', [parseInt(data.vote.uid)], function (err, result) {
+            if (err) throw err;
+            io.emit('refresh_score', {
+                data: result,
+                user_id: data.vote.uid
+            });
+        });
+    });
+
+    socket.on('disconnect', function () {
+        socket.leave(query.token);
+        voters.pop(query.token);
+        console.log('一个连接断开', socket.request.headers.referer);
+
+        io.emit('voters', {
+            type: 'voter_leave',
+            voters: voters
+        });
+    });
+});
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof port === 'string' ?
+        'Pipe ' + port :
+        'Port ' + port;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string' ?
+        'pipe ' + addr :
+        'port ' + addr.port;
+    debug('Listening on ' + bind);
+}

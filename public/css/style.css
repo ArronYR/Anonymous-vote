@@ -1,0 +1,55 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.flex-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.flex-container::before {
+    content: "";
+}
+
+.flex-container .footer {
+    padding: 1rem;
+}
+
+
+/* index */
+
+.logo,
+.logo:hover,
+.logo:active,
+.logo:visited,
+.logo:focus {
+    color: #5eb95e;
+    text-decoration: none;
+    cursor: default;
+    font-size: 2.6rem;
+    font-weight: 100;
+}
+
+#score-form .am-selected {
+    width: 160px;
+}
+
+.sidebar-nav-link span {
+    font-size: 1.4rem;
+}
+
+.sidebar-nav-link time {
+    font-size: 1rem;
+    color: #999999;
+}
+
+#result-container {
+    background-color: rgb(254, 248, 239);
+}

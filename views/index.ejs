@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title><%= title %> — 计研167评分系统</title>
+    <link rel="icon" type="image/png" href="/i/favicon.png"/>
+
+    <link rel="stylesheet" href="/css/amazeui.min.css"/>
+    
+    <link rel='stylesheet' href='/css/app.css' />
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+
+<body class="theme-white">
+    <div class="flex-container">
+        <div class="tpl-login">
+            <div class="tpl-login-content">
+                <h1><%= title %></h1>
+                <form class="am-form tpl-form-line-form" action="/" method="POST">
+                    <div class="am-form-group">
+                        <input type="text" class="tpl-form-input" name="token" placeholder="请输入Token">
+                    </div>
+                    <div class="am-form-group">
+                        <button type="submit" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交</button>
+                    </div>
+                </form>
+                <% if (message){ %>
+                    <p class="am-text-danger am-text-xs"><%= message %></p>
+                <% } %>
+            </div>
+        </div>
+        <div class="footer">
+            &copy;2017 - <a href="https://helloarron.com">Arron</a> 计研167
+        </div>
+    </div>
+
+    <!--JavaScript-->
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/amazeui.min.js" type="text/javascript"></script>
+</body>
+
+</html>
