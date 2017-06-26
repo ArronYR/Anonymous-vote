@@ -169,6 +169,7 @@ function renderResult($ele, data, callback) {
     $ele.find('#min_score').text(data.min_score);
     $ele.find('#total_score').text(data.total_score);
     $ele.find('#fatal_score').text(data.fatal_score);
+    $ele.find('#average_score').text(data.average_score);
     $ele.find('#convert_score').text(data.convert_score);
 
     typeof callback == "function" && callback();

@@ -90,8 +90,12 @@
                         </div>
                         <div class="row">
                             <div class="am-u-sm-3">
-                                <label for="fatal_score">最后得分</label>
+                                <label for="fatal_score">最终总分</label>
                                 <span class="am-text-danger" id="fatal_score">0</span>
+                            </div>
+                            <div class="am-u-sm-3">
+                                <label for="fatal_score">平均分</label>
+                                <span class="am-text-danger" id="average_score">0</span>
                             </div>
                             <div class="am-u-sm-3 am-u-end">
                                 <label for="convert_score">折算后</label>
@@ -165,7 +169,8 @@
             var fatal_score = total_score - max_score - min_score;
             fatal_score = fatal_score > 0 ? fatal_score : 0;
             var convert_voters = vote_count > 2 ? vote_count - 2 : 0;
-            var convert_score = convert_voters > 0 ? fatal_score / convert_voters * 0.03 : 0;
+            var average_score = convert_voters > 0 ? fatal_score / convert_voters : 0;
+            var convert_score = average_score * 0.03;
 
             var calculate = {
                 vote_count: vote_count,
@@ -173,6 +178,7 @@
                 min_score: min_score,
                 total_score: total_score,
                 fatal_score: fatal_score,
+                average_score: Math.round(average_score * 1000) / 1000,
                 convert_score: Math.round(convert_score * 100) / 100
             }
             renderResult($result, calculate);
