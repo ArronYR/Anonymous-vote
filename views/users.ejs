@@ -157,12 +157,12 @@
 
             $result.removeClass('am-hide');
 
-            _.sortBy(result.data, function (vote) {
-                return Math.max(vote.score);
+            var sort = _.sortBy(result.data, function (vote) {
+                return -parseInt(vote.score);
             });
             var vote_count = result.data.length;
-            var max_score = vote_count > 0 ? result.data[0].score : 0;
-            var min_score = vote_count > 0 ? result.data[vote_count-1].score : 0;
+            var max_score = vote_count > 0 ? sort[0].score : 0;
+            var min_score = vote_count > 0 ? sort[vote_count-1].score : 0;
             var total_score = _.reduce(result.data, function (memo, vote) {
                 return memo + vote.score;
             }, 0);
