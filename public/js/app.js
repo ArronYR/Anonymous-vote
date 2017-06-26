@@ -230,6 +230,12 @@ function renderEcharts(echarts, subtext, options) {
             type: 'bar',
             barWidth: '60%',
             data: typeof options != 'undefined' ? options.values : [],
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideTop'
+                }
+            },
             markPoint: {
                 data: [{
                         type: 'max',
