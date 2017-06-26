@@ -173,7 +173,7 @@
                 min_score: min_score,
                 total_score: total_score,
                 fatal_score: fatal_score,
-                convert_score: convert_score.toFixed(2)
+                convert_score: Math.round(convert_score * 100) / 100
             }
             renderResult($result, calculate);
         });
