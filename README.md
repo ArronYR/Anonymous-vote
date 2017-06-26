@@ -6,7 +6,7 @@
 
 ### Install
 
-在根目录下添加`config.json`，内容格式如下：
+在根目录下添加`config.json`，内容格式如下：
 ```json
 {
     "db": {
