@@ -65,7 +65,7 @@ $ pm2 stop vote
 ```cmd
 $ pm2 start vote
 ```
-如果要使用 `Nginx` 就行域名配置，只需在 `Nginx` 的配置文件目录中添加一个文件，内容如下：
+如果要使用 `Nginx` 配置域名，只需在 `Nginx` 的配置文件目录中添加一个文件，内容如下：
 ```nginx
 server{
     listen          80;
