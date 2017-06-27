@@ -6,6 +6,15 @@
 
 ### Install
 
+需要安装`Node.js`和`npm`。
+
+```cmd
+$ git clone https://github.com/ArronYR/Anonymous-vote
+
+$ cd myapp
+$ npm install
+```
+
 在根目录下添加`config.json`，内容格式如下：
 ```json
 {
@@ -20,4 +29,18 @@
 }
 ```
 
-`token`是用来控制访问【开始投票】页面以及页面中部分请求的参数。
+`token`是用来控制访问【开始投票】页面以及页面中部分请求的参数。
+
+### 启动
+
+`MacOS` 或 `Linux` 系统, 运行以下命令启动程序:
+```cmd
+$ DEBUG=myapp:* npm start
+```
+
+`Windows` 上执行以下命令启动：
+```cmd
+set DEBUG=myapp:* & npm start
+```
+
+更多的命令参数参考 [express-generator](http://expressjs.com/en/starter/generator.html)
