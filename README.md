@@ -35,12 +35,12 @@ $ npm install
 
 `MacOS` 或 `Linux` 系统, 运行以下命令启动程序:
 ```cmd
-$ DEBUG=myapp:* npm start
+$ DEBUG=vote:* npm start
 ```
 
 `Windows` 上执行以下命令启动：
 ```cmd
-set DEBUG=myapp:* & npm start
+set DEBUG=vote:* & npm start
 ```
 
 更多的命令参数参考 [express-generator](http://expressjs.com/en/starter/generator.html)
